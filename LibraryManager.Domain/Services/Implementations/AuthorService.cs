@@ -21,7 +21,7 @@ namespace LibraryManager.Domain.Services.Implementations
 
         public Author GetById(int id)
         {
-            return authorRepository.GetAuthorById(id);
+            return authorRepository.GetAuthorById(id);            
         }
     }
 }

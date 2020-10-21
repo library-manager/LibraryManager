@@ -5,9 +5,9 @@ using System;
 
 namespace LibraryManager.Infrastructure.Repositories.Mappings
 {
-    public sealed class AuthorMap : IEntityTypeConfiguration<Author>
+    public sealed class BookMap : IEntityTypeConfiguration<Book>
     {
-        public void Configure(EntityTypeBuilder<Author> builder)
+        public void Configure(EntityTypeBuilder<Book> builder)
         {
             if (builder == null)
             {
@@ -15,11 +15,12 @@ namespace LibraryManager.Infrastructure.Repositories.Mappings
             }
 
             builder.Property(t => t.Id).HasColumnName("id").IsRequired().HasColumnType("INT").ValueGeneratedOnAdd();
-            builder.Property(t => t.Name).HasColumnName("name").IsRequired().HasColumnType("VARCHAR").HasMaxLength(150);
+            builder.Property(t => t.Name).HasColumnName("name").IsRequired().HasColumnType("VARCHAR").HasMaxLength(100);
+            builder.Property(t => t.AuthorId).HasColumnName("author_id").IsRequired().HasColumnType("INT");
 
             builder.HasKey(t => t.Id);
 
-            builder.HasMany(a => a.BookList).WithOne(b => b.Author).HasForeignKey(b => b.AuthorId);
+            builder.HasOne(b => b.Author).WithMany(a => a.BookList).HasForeignKey(b => b.AuthorId);
         }
     }
 }

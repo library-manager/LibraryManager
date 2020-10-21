@@ -8,6 +8,7 @@ namespace LibraryManager.Domain
     {
         public static IServiceCollection AddDomainServices(this IServiceCollection services)
         {
+            services.AddTransient<IBookService, BookService>();
             services.AddTransient<IAuthorService, AuthorService>();
 
             return services;
