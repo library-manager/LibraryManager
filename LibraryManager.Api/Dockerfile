@@ -1,19 +1,22 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 as build
 WORKDIR /app
-EXPOSE 80
 
-COPY ./LibraryManager.Api/LibraryManager.Api.csproj ./LibraryManager.Api/LibraryManager.Api.csproj
-COPY ./LibraryManager.Domain/LibraryManager.Domain.csproj ./LibraryManager.Domain/LibraryManager.Domain.csproj
-COPY ./LibraryManager.Infrastructure/LibraryManager.Infrastructure.csproj ./LibraryManager.Infrastructure/LibraryManager.Infrastructure.csproj
-RUN dotnet restore "LibraryManager.Api/LibraryManager.Api.csproj"
+COPY *.sln .
+COPY LibraryManager.Api/*.csproj ./LibraryManager.Api/
+COPY LibraryManager.Domain/*.csproj ./LibraryManager.Domain/
+COPY ./LibraryManager.Infrastructure/*.csproj ./LibraryManager.Infrastructure/
 
-COPY . .
-RUN dotnet build -c Release --no-restore
+RUN dotnet restore
 
-RUN dotnet publish "./LibraryManager/LibraryManager.Api/LibraryManager.Api.csproj" -c Release -o /../../dist --no-restore
+COPY LibraryManager.Api/. ./LibraryManager.Api/
+COPY LibraryManager.Domain/. ./LibraryManager.Domain/
+COPY LibraryManager.Infrastructure/. ./LibraryManager.Infrastructure/
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1
 WORKDIR /app
-ENV ASPNETCORE_ENVIRONMENT Local
-ENTRYPOINT ["dotnet", "LibraryManager.Api.dll"]
-COPY --from=builder /sln/dist .
+RUN dotnet publish -c Release -o out 
+
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS runtime
+WORKDIR /app 
+
+COPY --from=build /app/out ./
+ENTRYPOINT ["dotnet", "library-manager-api.dll"]
