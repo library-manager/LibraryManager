@@ -1,5 +1,4 @@
-﻿using LibraryManager.Domain.Entities;
-using LibraryManager.Domain.Entities.Dtos;
+﻿using LibraryManager.Domain.Entities.Dtos;
 using LibraryManager.Domain.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
