@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryManager.Api.Controllers
 {
+    //Teste
     [Route("api/[controller]")]
     public class AuthorController : Controller
     {
