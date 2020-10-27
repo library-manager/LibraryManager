@@ -21,11 +21,11 @@ namespace LibraryManager.Api.Controllers
             return Ok(result);
         }
 
-        //[HttpGet("{id}")]
-        //public IActionResult GetById(int id)
-        //{
-        //    var result = authorService.GetById(id);
-        //    return Ok(result);
-        //}
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var result = authorService.GetById(id);
+            return Ok(result);
+        }
     }
 }
