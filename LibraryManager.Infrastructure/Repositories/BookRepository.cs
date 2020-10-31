@@ -1,4 +1,5 @@
 ﻿using LibraryManager.Domain.Entities;
+using LibraryManager.Domain.Entities.Dtos;
 using LibraryManager.Domain.Services.Contracts;
 using LibraryManager.Infrastructure.Core;
 using Microsoft.EntityFrameworkCore;
@@ -14,9 +15,15 @@ namespace LibraryManager.Infrastructure.Repositories
         {
         }
 
-        public IList<Book> GetAll()
+        public IList<GetAllBooksDto> GetAll()
         {
-            return Query().ToList();
+            return Query().Include(b => b.Author).Select(b => new GetAllBooksDto
+            {
+                Name = b.Name,
+                AuthorName = b.Author.Name,
+                ImageUrl = b.ImageUrl,
+                Summary = b.Summary
+            }).ToList();
         }
 
         public Book GetAuthorById(int id)

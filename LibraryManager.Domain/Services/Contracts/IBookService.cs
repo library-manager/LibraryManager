@@ -6,7 +6,7 @@ namespace LibraryManager.Domain.Services.Contracts
 {
     public interface IBookService
     {
-        IList<Book> GetAll();
+        IList<GetAllBooksDto> GetAll();
         Book GetById(int id);
         Book Create(CreateBookDto book);
     }
