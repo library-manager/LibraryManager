@@ -14,8 +14,8 @@ namespace LibraryManager.Domain.Services.Implementations
             this.bookRepository = bookRepository;
         }
 
-        public IList<Book> GetAll()
-        {            
+        public IList<GetAllBooksDto> GetAll()
+        {
             return bookRepository.GetAll();
         }
 
