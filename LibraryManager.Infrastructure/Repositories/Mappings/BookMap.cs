@@ -17,6 +17,8 @@ namespace LibraryManager.Infrastructure.Repositories.Mappings
             builder.Property(t => t.Id).HasColumnName("id").IsRequired().HasColumnType("INT").ValueGeneratedOnAdd();
             builder.Property(t => t.Name).HasColumnName("name").IsRequired().HasColumnType("VARCHAR").HasMaxLength(100);
             builder.Property(t => t.AuthorId).HasColumnName("author_id").IsRequired().HasColumnType("INT");
+            builder.Property(t => t.Summary).HasColumnName("summary").IsRequired().HasColumnType("VARCHAR").HasMaxLength(500);
+            builder.Property(t => t.ImageUrl).HasColumnName("image_url").IsRequired().HasColumnType("VARCHAR").HasMaxLength(300);
 
             builder.HasKey(t => t.Id);
 
