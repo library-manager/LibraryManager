@@ -26,7 +26,11 @@ namespace LibraryManager.Domain.Services.Implementations
 
         public Book Create(CreateBookDto createBookDto)
         {
-            var book = new Book(createBookDto.Name, createBookDto.AuthorId);
+            var book = new Book(createBookDto.Name,
+                                createBookDto.AuthorId,
+                                createBookDto.Summary,
+                                createBookDto.ImageUrl);
+
             bookRepository.Insert(book);
             return book;
         }
